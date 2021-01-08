@@ -1,0 +1,18 @@
+#gameboard {
+    display: grid;
+    color: red;
+    background-color: grey;
+    grid-template-columns: repeat(3, auto);
+    width: 48vw;
+    margin: auto;
+    column-gap: 1em;
+    row-gap: 1em;
+}
+
+.gameSquare {
+    background-color: aqua;
+    cursor: pointer;
+    text-align: center;
+    line-height: 110px;
+}
+
