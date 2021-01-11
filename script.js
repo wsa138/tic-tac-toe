@@ -6,44 +6,56 @@ const gameboard = (function () {
     // An array of the squares document objects.
     let gameSquareDoms = _gameSquareIds.map(function(squareId) {
         return document.getElementById(squareId);
-    })
+    });
 
-    // Makes gameSquareDoms public.
-    return {gameSquareDoms};
+    // Adds event listener to elements in argument.
+    function addEventsToSquares(squares) {
+        squares.forEach(function(square) {
+            square.addEventListener("click", function addEvent() {
+                square.innerHTML = test.mark;
+                console.log(square);
+                // Remove the event listener function after being clicked.
+                square.removeEventListener("click", addEvent)
+            })
+        })
+    };
+
+
+    // Calls function to add event listener to squares.
+    return addEventsToSquares(gameSquareDoms);
 })() 
 
 
 
-// Create players in response to player number selection
-let _playerButtons = Array.from(document.getElementsByClassName("playerButton"));
-_playerButtons.forEach(function(btn) {
-    btn.addEventListener("click", function() {
-        console.log(btn.id);
-    });
-}); 
-
 
 
 // Player creator factory function.
-const player = (mark) => {
+const createPlayer = (mark) => {
     return {mark};
-} 
-
-let test = player("testMark");
-
-
-// Adds event listener to elements in argument.
-function addEventsToSquares(squares) {
-    squares.forEach(function(square) {
-        square.addEventListener("click", function addEvent() {
-            square.innerHTML = test.mark;
-            console.log(square);
-            // Remove the event listener function after being clicked.
-            square.removeEventListener("click", addEvent)
-        })
-    })
 }
 
+let test = Object.create(createPlayer("M"));
 
-// Calls function to add event listener to squares.
-addEventsToSquares(gameboard.gameSquareDoms);
+
+
+
+// Game functionality method.
+const game = (function() {
+    // Creates players based on which player button is clicked. 
+    function choosePlayers() {
+        let onePlayer = document.getElementById("onePlayer");
+        let twoPlayer = document.getElementById("twoPlayer");
+        onePlayer.addEventListener("click", function() {
+            let xPlayer = Object.create(createPlayer("x"));
+            console.log(xPlayer.mark);
+        })
+        twoPlayer.addEventListener("click", function() {
+            let xPlayer = Object.create(createPlayer("EX"));
+            let oPlayer = Object.create(createPlayer("O"));
+            console.log(xPlayer.mark, oPlayer.mark); 
+        })
+    }
+
+    return choosePlayers();
+
+})()
