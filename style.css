@@ -2,7 +2,7 @@
     display: grid;
     color: red;
     background-color: grey;
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: 1fr 1fr 1fr;
     width: 48vw;
     margin: auto;
     column-gap: 1em;
