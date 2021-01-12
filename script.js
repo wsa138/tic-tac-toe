@@ -31,7 +31,6 @@ const gameBoard = (function() {
     }
 
     
-
     return {
         gameBoardArray,
         test,
@@ -43,19 +42,6 @@ const gameBoard = (function() {
 
 
 
-// Contains all functions that alter the display.
-const displayController = function() {
-    // A function that sets event listeners on squares and runs the markSquare function.
-    const setAvailableSquares = function(arr) {
-        console.log(arr)
-    }
-
-    return {
-        setAvaileableSquare: setAvailableSquares
-    }
-}
-
-
 
 // Factory creates a player object with a name and their mark(x or o).
 const player = function(name, mark) {
@@ -64,6 +50,9 @@ const player = function(name, mark) {
         mark
     };
 }
+
+
+
 
 // Sample players for the game.
 let xPlayer = Object.create(player("xPlayer", "X"));
@@ -83,5 +72,8 @@ function setCurrentPlayer() {
 }
 
 
+
+
+
 /* An object that controls the flow of the game. */
-const gameflow = {}
+const gameFlow = {}
