@@ -19,7 +19,7 @@ const gameBoard = (function() {
     function setListener(arr) {
         return arr.forEach(function(element) {
             element.addEventListener("click", function() {
-                console.log("test");
+                replaceInner(element, "x");
             })
         })
     }
