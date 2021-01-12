@@ -24,7 +24,8 @@ const gameBoard = (function() {
     function setListener(arr) {
         return arr.forEach(function(element) {
             element.addEventListener("click", function() {
-                replaceInner(element, xPlayer.mark);
+                replaceInner(element, playersArr[currentPlayer].mark);
+                setCurrentPlayer();
             })
         })
     }
@@ -71,7 +72,15 @@ let oPlayer = Object.create(player("oPlayer", "O"));
 // Array of the sample players.
 let playersArr = [xPlayer, oPlayer];
 
+let currentPlayer = 0;
 
+function setCurrentPlayer() {
+    if (currentPlayer === 0) {
+        currentPlayer = 1;
+    } else {
+        currentPlayer = 0;
+    }
+}
 
 
 /* An object that controls the flow of the game. */
