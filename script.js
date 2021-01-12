@@ -9,11 +9,29 @@ const gameBoard = (function() {
         console.log(i);
     }
 
+    // Function replaces the innerHTML of a dom element.
+    function replaceInner(element, text) {
+        element.innerHTML = text;
+    }
+    
+
+    // Function that adds event listeners on elements in an array.
+    function setListener(arr) {
+        return arr.forEach(function(element) {
+            element.addEventListener("click", function() {
+                console.log("test");
+            })
+        })
+    }
+
     return {
         gameBoardArray,
-        test
+        test,
+        replaceInner,
+        setListener
     }
 })();
+
 
 
 // Contains all functions that alter the display.
