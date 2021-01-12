@@ -10,8 +10,13 @@ const gameBoard = (function() {
     }
 
     // Function replaces the innerHTML of a dom element.
-    function replaceInner(element, text) {
+    let replaceInner = function(element, text) {
         element.innerHTML = text;
+    }
+
+    // Function removes event listener from a DOM element.
+    function removeEvent(element) {
+        element.removeEventListener();
     }
     
 
@@ -19,16 +24,19 @@ const gameBoard = (function() {
     function setListener(arr) {
         return arr.forEach(function(element) {
             element.addEventListener("click", function() {
-                replaceInner(element, "x");
+                replaceInner(element, xPlayer.mark);
             })
         })
     }
+
+    
 
     return {
         gameBoardArray,
         test,
         replaceInner,
-        setListener
+        setListener,
+        removeEvent
     }
 })();
 
@@ -55,6 +63,14 @@ const player = function(name, mark) {
         mark
     };
 }
+
+// Sample players for the game.
+let xPlayer = Object.create(player("xPlayer", "X"));
+let oPlayer = Object.create(player("oPlayer", "O"));
+
+// Array of the sample players.
+let playersArr = [xPlayer, oPlayer];
+
 
 
 
