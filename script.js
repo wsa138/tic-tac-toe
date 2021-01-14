@@ -14,10 +14,21 @@ const gameBoard = (function() {
         element.innerHTML = text;
     }
 
-    // Function removes event listener from a DOM element.
-    function removeEvent(element) {
-        element.removeEventListener();
+    // Function checks for a win on the gameboard.
+    function checkWin() {
+        if (gameBoardArray[0].innerHTML === gameBoardArray[1].innerHTML && 
+            gameBoardArray[0].innerHTML === gameBoardArray[2].innerHTML) {
+            console.log(gameBoardArray[0].innerHTML);
+        } else if (gameBoardArray[3].innerHTML === gameBoardArray[4].innerHTML && 
+            gameBoardArray[3].innerHTML === gameBoardArray[5].innerHTML) {
+                console.log(gameBoardArray[3].innerHTML);
+        } else if (gameBoardArray[6].innerHTML === gameBoardArray[7].innerHTML && 
+            gameBoardArray[6].innerHTML === gameBoardArray[8].innerHTML) {
+                console.log(gameBoardArray[6].innerHTML)
+        }
     }
+
+
 
     // Function that adds event listeners on elements in an array.
     function setListener(arr) {
@@ -38,10 +49,9 @@ const gameBoard = (function() {
         gameBoardArray,
         test,
         setListener,
+        checkWin
     }
 })();
-
-// gameBoard.setListener(gameBoard.gameBoardArray)
 
 
 // Factory creates a player object with a name and their mark(x or o).
@@ -76,5 +86,10 @@ function setCurrentPlayer() {
 
 
 
+
+
 /* An object that controls the flow of the game. */
 const gameFlow = {}
+
+
+gameBoard.setListener(gameBoard.gameBoardArray)
