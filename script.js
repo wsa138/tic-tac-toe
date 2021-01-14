@@ -18,29 +18,30 @@ const gameBoard = (function() {
     function removeEvent(element) {
         element.removeEventListener();
     }
-    
 
     // Function that adds event listeners on elements in an array.
     function setListener(arr) {
         return arr.forEach(function(element) {
             element.addEventListener("click", function() {
-                replaceInner(element, playersArr[currentPlayer].mark);
-                setCurrentPlayer();
+                if (element.innerHTML === "X" || element.innerHTML === "O") {
+                    return;
+                } else {
+                    replaceInner(element, playersArr[currentPlayer].mark);
+                    setCurrentPlayer();
+                }
             })
         })
     }
 
-    
+
     return {
         gameBoardArray,
         test,
-        replaceInner,
         setListener,
-        removeEvent
     }
 })();
 
-
+// gameBoard.setListener(gameBoard.gameBoardArray)
 
 
 // Factory creates a player object with a name and their mark(x or o).
