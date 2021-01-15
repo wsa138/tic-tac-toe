@@ -42,7 +42,15 @@ const gameBoard = (function() {
                 return xSpaces.includes(ele);
             })
         })) {
-            console.log("win");
+            console.log("Player X Wins!");
+        } else if (winConditions.some(function(arr) {
+            return arr.every(function(ele) {
+                return oSpaces.includes(ele);
+            })
+        })) {
+            console.log("Player O Wins!")
+        } else if (xSpaces.length > 4) {
+            console.log("Tie Game");
         }
     }
 
