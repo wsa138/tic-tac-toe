@@ -12,19 +12,37 @@ const gameBoard = (function() {
     // Function replaces the innerHTML of a dom element.
     let replaceInner = function(element, text) {
         element.innerHTML = text;
+        switch(text) {
+            case "X":
+                xSpaces.push(parseInt(element.id.match(/\d/)[0]));
+                break;
+            case "O":
+                oSpaces.push(parseInt(element.id.match(/\d/)[0]));
+                break;
+        }
     }
+
+    // Win Conditions.
+    let winConditions = [
+        [0, 1, 2], 
+        [3, 4, 5], 
+        [6, 7, 8], 
+        [0, 3, 6], 
+        [1, 4, 7],
+        [2, 5, 8], 
+        [0, 4, 8], 
+        [2, 4, 6]
+    ]
 
     // Function checks for a win on the gameboard.
     function checkWin() {
-        if (gameBoardArray[0].innerHTML === gameBoardArray[1].innerHTML && 
-            gameBoardArray[0].innerHTML === gameBoardArray[2].innerHTML) {
-            console.log(gameBoardArray[0].innerHTML);
-        } else if (gameBoardArray[3].innerHTML === gameBoardArray[4].innerHTML && 
-            gameBoardArray[3].innerHTML === gameBoardArray[5].innerHTML) {
-                console.log(gameBoardArray[3].innerHTML);
-        } else if (gameBoardArray[6].innerHTML === gameBoardArray[7].innerHTML && 
-            gameBoardArray[6].innerHTML === gameBoardArray[8].innerHTML) {
-                console.log(gameBoardArray[6].innerHTML)
+        console.log("checking for win");
+        if (winConditions.some(function(arr) {
+            return arr.every(function(ele) {
+                return xSpaces.includes(ele);
+            })
+        })) {
+            console.log("win");
         }
     }
 
@@ -39,6 +57,7 @@ const gameBoard = (function() {
                 } else {
                     replaceInner(element, playersArr[currentPlayer].mark);
                     setCurrentPlayer();
+
                 }
             })
         })
@@ -49,7 +68,8 @@ const gameBoard = (function() {
         gameBoardArray,
         test,
         setListener,
-        checkWin
+        checkWin,
+        winConditions
     }
 })();
 
@@ -83,7 +103,8 @@ function setCurrentPlayer() {
 }
 
 
-
+let xSpaces = [];
+let oSpaces = [];
 
 
 
