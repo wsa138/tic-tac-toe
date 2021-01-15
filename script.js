@@ -4,13 +4,8 @@ const gameBoard = (function() {
     // Creates an array of each square element.
     let gameBoardArray = Array.from(document.getElementsByClassName("gameSquare"));
 
-    // Example function
-    function test(i) {
-        console.log(i);
-    }
-
     // Function replaces the innerHTML of a dom element.
-    let replaceInner = function(element, text) {
+    let _replaceInner = function(element, text) {
         element.innerHTML = text;
         switch(text) {
             case "X":
@@ -35,7 +30,7 @@ const gameBoard = (function() {
     ]
 
     // Function checks for a win on the gameboard.
-    function checkWin() {
+    function _checkWin() {
         console.log("checking for win");
         if (winConditions.some(function(arr) {
             return arr.every(function(ele) {
@@ -63,7 +58,8 @@ const gameBoard = (function() {
                 if (element.innerHTML === "X" || element.innerHTML === "O") {
                     return;
                 } else {
-                    replaceInner(element, playersArr[currentPlayer].mark);
+                    _replaceInner(element, playersArr[currentPlayer].mark);
+                    _checkWin();
                     setCurrentPlayer();
 
                 }
@@ -74,9 +70,7 @@ const gameBoard = (function() {
 
     return {
         gameBoardArray,
-        test,
         setListener,
-        checkWin,
         winConditions
     }
 })();
