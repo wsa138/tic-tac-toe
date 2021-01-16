@@ -16,3 +16,17 @@
     line-height: 110px;
 }
 
+header {
+    color: red;
+    text-align: center;
+}
+
+#playerSelect {
+    text-align: center;
+    padding-bottom: 1em;
+}
+
+.gameSquare {
+    font-size: 3em;
+}
+
