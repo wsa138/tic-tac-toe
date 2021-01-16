@@ -5,32 +5,32 @@ const gameBoard = (function() {
     let gameBoardArray = Array.from(document.getElementsByClassName("gameSquare"));
 
     // Function replaces the innerHTML of a dom element.
-    let _replaceInner = function(element, text) {
+    let _replaceInner = function(element, text, xArr, oArr) {
         element.innerHTML = text;
         switch(text) {
             case "X":
-                xSpaces.push(parseInt(element.id.match(/\d/)[0]));
+                xArr.push(parseInt(element.id.match(/\d/)[0]));
                 break;
             case "O":
-                oSpaces.push(parseInt(element.id.match(/\d/)[0]));
+                oArr.push(parseInt(element.id.match(/\d/)[0]));
                 break;
         }
     }
 
-    // Win Conditions.
-    let winConditions = [
-        [0, 1, 2], 
-        [3, 4, 5], 
-        [6, 7, 8], 
-        [0, 3, 6], 
-        [1, 4, 7],
-        [2, 5, 8], 
-        [0, 4, 8], 
-        [2, 4, 6]
-    ]
 
     // Function checks for a win on the gameboard.
     function _checkWin() {
+        // Arrays of winning space combinations to check.
+        const winConditions = [
+            [0, 1, 2], 
+            [3, 4, 5], 
+            [6, 7, 8], 
+            [0, 3, 6], 
+            [1, 4, 7],
+            [2, 5, 8], 
+            [0, 4, 8], 
+            [2, 4, 6]
+        ]
         console.log("checking for win");
         if (winConditions.some(function(arr) {
             return arr.every(function(ele) {
@@ -52,13 +52,13 @@ const gameBoard = (function() {
 
 
     // Function that adds event listeners on elements in an array.
-    function setListener(arr) {
+    function setListener(arr, xArr, oArr) {
         return arr.forEach(function(element) {
             element.addEventListener("click", function() {
                 if (element.innerHTML === "X" || element.innerHTML === "O") {
                     return;
                 } else {
-                    _replaceInner(element, playersArr[currentPlayer].mark);
+                    _replaceInner(element, playersArr[currentPlayer].mark, xArr, oArr);
                     _checkWin();
                     setCurrentPlayer();
 
@@ -70,8 +70,7 @@ const gameBoard = (function() {
 
     return {
         gameBoardArray,
-        setListener,
-        winConditions
+        setListener
     }
 })();
 
@@ -109,10 +108,16 @@ let xSpaces = [];
 let oSpaces = [];
 
 
+/* Game controller module. Contains code for creating selected amount of players,
+creating necessaty player arrays, initiating the game. */
+const displayController = (function() {
 
 
-/* An object that controls the flow of the game. */
-const gameFlow = {}
 
 
-gameBoard.setListener(gameBoard.gameBoardArray)
+
+    return gameBoard.setListener(gameBoard.gameBoardArray, xSpaces, oSpaces)
+    
+})()
+
+
