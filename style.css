@@ -24,6 +24,7 @@ header {
 #playerSelect {
     text-align: center;
     padding-bottom: 1em;
+    display: none;
 }
 
 .gameSquare {
