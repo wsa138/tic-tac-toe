@@ -50,6 +50,7 @@ const gameBoard = (function() {
 
 
 
+
     // Function that adds event listeners on elements in an array.
     function setListener(arr, xArr, oArr) {
         return arr.forEach(function(element) {
@@ -127,6 +128,7 @@ const controller = (function() {
         winner.innerHTML = `Player ${mark} Wins!`;
         winner.id = "winner";
         results.appendChild(winner);
+        results.style.display = "block";
     }
 
     // Creates tie banner.

@@ -1,3 +1,7 @@
+body {
+    background-color: rgb(197, 194, 194);
+}
+
 #gameboard {
     display: grid;
     color: red;
@@ -31,3 +35,10 @@ header {
     font-size: 3em;
 }
 
+#results {
+    color: red;
+    text-align: center;
+    padding: 1em;
+    font-size: 3em;
+    display: none;
+}
