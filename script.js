@@ -19,11 +19,11 @@ const gameBoard = (function() {
 
 
     // Function checks for a win on the gameboard.
-    function _checkWin() {
+    function _checkWin(xArr, oArr) {
         // Arrays of winning space combinations to check.
         const winConditions = [
             [0, 1, 2], 
-            [3, 4, 5], 
+            [3, 4, 5],
             [6, 7, 8], 
             [0, 3, 6], 
             [1, 4, 7],
@@ -31,20 +31,19 @@ const gameBoard = (function() {
             [0, 4, 8], 
             [2, 4, 6]
         ]
-        console.log("checking for win");
         if (winConditions.some(function(arr) {
             return arr.every(function(ele) {
-                return xSpaces.includes(ele);
+                return xArr.includes(ele);
             })
         })) {
             console.log("Player X Wins!");
         } else if (winConditions.some(function(arr) {
             return arr.every(function(ele) {
-                return oSpaces.includes(ele);
+                return oArr.includes(ele);
             })
         })) {
             console.log("Player O Wins!")
-        } else if (xSpaces.length > 4) {
+        } else if (xArr.length > 4) {
             console.log("Tie Game");
         }
     }
@@ -58,8 +57,8 @@ const gameBoard = (function() {
                 if (element.innerHTML === "X" || element.innerHTML === "O") {
                     return;
                 } else {
-                    _replaceInner(element, playersArr[currentPlayer].mark, xArr, oArr);
-                    _checkWin();
+                    _replaceInner(element, playerMod.playersArr[currentPlayer].mark, xArr, oArr);
+                    _checkWin(xArr, oArr);
                     setCurrentPlayer();
 
                 }
@@ -75,23 +74,6 @@ const gameBoard = (function() {
 })();
 
 
-// Factory creates a player object with a name and their mark(x or o).
-const player = function(name, mark) {
-    return {
-        name,
-        mark
-    };
-}
-
-
-
-
-// Sample players for the game.
-let xPlayer = Object.create(player("xPlayer", "X"));
-let oPlayer = Object.create(player("oPlayer", "O"));
-
-// Array of the sample players.
-let playersArr = [xPlayer, oPlayer];
 
 let currentPlayer = 0;
 
@@ -104,20 +86,51 @@ function setCurrentPlayer() {
 }
 
 
-let xSpaces = [];
-let oSpaces = [];
-
-
-/* Game controller module. Contains code for creating selected amount of players,
-creating necessaty player arrays, initiating the game. */
-const displayController = (function() {
 
 
 
+// Game playerModule
+const playerMod = (function() {
 
+    // Factory creates a player object with a name and their mark(x or o).
+    const player = function(name, mark) {
+        return {
+            name,
+            mark
+        };
+    }
 
-    return gameBoard.setListener(gameBoard.gameBoardArray, xSpaces, oSpaces)
+    // Sample players for the game.
+    let _xPlayer = Object.create(player("xPlayer", "X"));
+    let _oPlayer = Object.create(player("oPlayer", "O"));
+
+    // Array of the sample players.
+    let playersArr = [_xPlayer, _oPlayer];
+
+    let xSpaces = [];
+    let oSpaces = [];
+
+    return {playersArr, xSpaces, oSpaces}
     
-})()
+})();
 
 
+// Controller module.
+const contriller = (function() {
+    // Creates winner banner.
+    function winner() {
+        
+    }
+
+    // Creates tie banner.
+    function tie() {
+
+    }
+
+    return {}
+})();
+
+
+gameBoard.setListener(gameBoard.gameBoardArray, 
+    playerMod.xSpaces, 
+    playerMod.oSpaces)
