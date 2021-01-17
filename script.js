@@ -160,10 +160,25 @@ const controller = (function() {
         let playAgain = document.createElement("BUTTON");
         playAgain.id = "playAgain";
         playAgain.innerHTML = "Play Again"
+        playAgain.addEventListener("click", reset);
         _playAgainParent.appendChild(playAgain);
     }
 
-    return {winner, tie, playAgain}
+    // Resets x and o arrays, results child element and all square innerHTML.
+    function reset() {
+        playerMod.xSpaces.length = 0;
+        playerMod.oSpaces.length = 0;
+        _results.removeChild(_results.childNodes[1]);
+        _results.style.display = "none";
+        _playAgainParent.removeChild(_playAgainParent.childNodes[1])
+        gameBoard.gameBoardArray.forEach(function(sqr) {
+            sqr.innerHTML = "&nbsp";
+        })
+    }
+
+
+
+    return {winner, tie, playAgain, reset}
 })();
 
 
