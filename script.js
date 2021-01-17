@@ -18,8 +18,6 @@ const gameBoard = (function() {
     }
 
 
-    // Win flag.
-    let win = 0;
 
     // Function checks for a win on the gameboard.
     function _checkWin(xArr, oArr) {
@@ -41,7 +39,6 @@ const gameBoard = (function() {
         })) {
             controller.winner("X");
             controller.playAgain();
-            win = 1;
         } else if (winConditions.some(function(arr) {
             return arr.every(function(ele) {
                 return oArr.includes(ele);
@@ -49,11 +46,9 @@ const gameBoard = (function() {
         })) {
             controller.winner("O");
             controller.playAgain();
-            win = 1;
         } else if (xArr.length > 4) {
             controller.tie()
             controller.playAgain();
-            win = 1;
         }
     }
 
@@ -65,8 +60,8 @@ const gameBoard = (function() {
         return arr.forEach(function(element) {
             element.addEventListener("click", function() {
                 if (element.innerHTML === "X" || 
-                element.innerHTML === 1 ||
-                win === 1) {
+                element.innerHTML === "O" ||
+                document.getElementById("results").childNodes[1]) {
                     return;
                 } else {
                     _replaceInner(element, playerMod.playersArr[currentPlayer].mark, xArr, oArr);
@@ -168,6 +163,7 @@ const controller = (function() {
     function reset() {
         playerMod.xSpaces.length = 0;
         playerMod.oSpaces.length = 0;
+        currentPlayer = 0;
         _results.removeChild(_results.childNodes[1]);
         _results.style.display = "none";
         _playAgainParent.removeChild(_playAgainParent.childNodes[1])
