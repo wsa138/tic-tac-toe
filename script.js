@@ -36,15 +36,15 @@ const gameBoard = (function() {
                 return xArr.includes(ele);
             })
         })) {
-            console.log("Player X Wins!");
+            controller.winner("X");
         } else if (winConditions.some(function(arr) {
             return arr.every(function(ele) {
                 return oArr.includes(ele);
             })
         })) {
-            console.log("Player O Wins!")
+            winner("O");
         } else if (xArr.length > 4) {
-            console.log("Tie Game");
+            controller.tie()
         }
     }
 
@@ -116,18 +116,28 @@ const playerMod = (function() {
 
 
 // Controller module.
-const contriller = (function() {
+const controller = (function() {
+
+    // Winner banner parent element.
+    let results = document.getElementById("results");
+
     // Creates winner banner.
-    function winner() {
-        
+    function winner(mark) {
+        let winner = document.createElement("winner");
+        winner.innerHTML = `Player ${mark} Wins!`;
+        winner.id = "winner";
+        results.appendChild(winner);
     }
 
     // Creates tie banner.
     function tie() {
-
+        let tie = document.createElement("tie");
+        tie.innerHTML = "TIE!";
+        tie.id = "tie";
+        results.appendChild(tie);
     }
 
-    return {}
+    return {winner, tie}
 })();
 
 
