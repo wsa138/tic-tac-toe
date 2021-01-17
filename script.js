@@ -18,6 +18,9 @@ const gameBoard = (function() {
     }
 
 
+    // Win flag.
+    let win = 0;
+
     // Function checks for a win on the gameboard.
     function _checkWin(xArr, oArr) {
         // Arrays of winning space combinations to check.
@@ -37,14 +40,17 @@ const gameBoard = (function() {
             })
         })) {
             controller.winner("X");
+            win = 1;
         } else if (winConditions.some(function(arr) {
             return arr.every(function(ele) {
                 return oArr.includes(ele);
             })
         })) {
             winner("O");
+            win = 1;
         } else if (xArr.length > 4) {
             controller.tie()
+            win = 1;
         }
     }
 
@@ -55,7 +61,9 @@ const gameBoard = (function() {
     function setListener(arr, xArr, oArr) {
         return arr.forEach(function(element) {
             element.addEventListener("click", function() {
-                if (element.innerHTML === "X" || element.innerHTML === "O") {
+                if (element.innerHTML === "X" || 
+                element.innerHTML === 1 ||
+                win === 1) {
                     return;
                 } else {
                     _replaceInner(element, playerMod.playersArr[currentPlayer].mark, xArr, oArr);
@@ -120,26 +128,38 @@ const playerMod = (function() {
 const controller = (function() {
 
     // Winner banner parent element.
-    let results = document.getElementById("results");
+    let _results = document.getElementById("results");
+
+    // Play again button parent element.
+    let _playAgainParent = document.getElementById("postGame");
+
 
     // Creates winner banner.
     function winner(mark) {
-        let winner = document.createElement("winner");
+        let winner = document.createElement("div");
         winner.innerHTML = `Player ${mark} Wins!`;
         winner.id = "winner";
-        results.appendChild(winner);
-        results.style.display = "block";
+        _results.appendChild(winner);
+        _results.style.display = "block";
     }
 
     // Creates tie banner.
     function tie() {
-        let tie = document.createElement("tie");
+        let tie = document.createElement("div");
         tie.innerHTML = "TIE!";
         tie.id = "tie";
-        results.appendChild(tie);
+        _results.appendChild(tie);
     }
 
-    return {winner, tie}
+    // Create play again button.
+    function playAgain() {
+        let playAgain = document.createElement("BUTTON");
+        playAgain.id = "playAgain";
+        playAgain.innerHTML = "Play Again"
+        _playAgainParent.appendChild(playAgain);
+    }
+
+    return {winner, tie, playAgain}
 })();
 
 
