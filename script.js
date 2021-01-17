@@ -40,16 +40,19 @@ const gameBoard = (function() {
             })
         })) {
             controller.winner("X");
+            controller.playAgain();
             win = 1;
         } else if (winConditions.some(function(arr) {
             return arr.every(function(ele) {
                 return oArr.includes(ele);
             })
         })) {
-            winner("O");
+            controller.winner("O");
+            controller.playAgain();
             win = 1;
         } else if (xArr.length > 4) {
             controller.tie()
+            controller.playAgain();
             win = 1;
         }
     }
@@ -149,6 +152,7 @@ const controller = (function() {
         tie.innerHTML = "TIE!";
         tie.id = "tie";
         _results.appendChild(tie);
+        _results.style.display = "block";
     }
 
     // Create play again button.
