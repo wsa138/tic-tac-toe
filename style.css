@@ -1,11 +1,10 @@
 body {
-    background-color: rgb(197, 194, 194);
+    background-color: #E3E2DF;
 }
 
 #gameboard {
     display: grid;
-    color: red;
-    background-color: grey;
+    background-color:#5D001E;
     grid-template-columns: 1fr 1fr 1fr;
     width: 48vw;
     margin: auto;
@@ -14,15 +13,18 @@ body {
 }
 
 .gameSquare {
-    background-color: aqua;
+    background-color: #E3AFBC;
     cursor: pointer;
     text-align: center;
     line-height: 110px;
 }
 
 header {
-    color: red;
+    color: #9A1750;
     text-align: center;
+    font-size: 1.5em;
+    text-decoration: underline;
+    text-shadow: 2px 2px #E3AFBC;
 }
 
 #playerSelect {
@@ -33,12 +35,15 @@ header {
 
 .gameSquare {
     font-size: 3em;
+    color:  #9A1750;
+    font-weight: 700;
 }
 
 #results {
-    color: red;
+    color: #9A1750;
     text-align: center;
     padding: 1em;
     font-size: 3em;
     display: none;
+    text-shadow: 2px 2px #EE4C7C
 }
