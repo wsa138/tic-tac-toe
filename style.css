@@ -10,6 +10,8 @@ body {
     margin: auto;
     column-gap: 1em;
     row-gap: 1em;
+    max-width: 30em;
+    min-width: 20em;
 }
 
 .gameSquare {
@@ -69,3 +71,4 @@ header {
     background-color: #5D001E;
     color: #E3AFBC;
 }
+
