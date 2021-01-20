@@ -35,7 +35,7 @@ header {
     padding-bottom: 1em;
 }
 
-#onePlayer {
+#onePlayer, #twoPlayer {
     font-size: 1em;
     cursor: pointer;
     color:  #5D001E;
@@ -47,16 +47,9 @@ header {
     transition-duration: 0.3s;
 }
 
-#twoPlayer {
-    font-size: 1em;
-    cursor: pointer;
-    color:  #5D001E;
-    background-color: #E3AFBC;
-    border: 2px solid  #9A1750;
-    box-shadow: 1px 2px  #5D001E;
-    padding: 1vh;
-    border-radius: 1vh;
-    transition-duration: 0.3s;
+#onePlayer:hover, #twoPlayer:hover {
+    background-color: #5D001E;
+    color: #E3AFBC;
 }
 
 .gameSquare {
