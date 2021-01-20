@@ -70,7 +70,6 @@ const gameBoard = (function() {
                     return;
                 } else {
                     removePicked(this.id);
-                    console.log(availableSquares);
                     _replaceInner(element, playerMod.playersArr[currentPlayer].mark, xArr, oArr);
                     _checkWin(xArr, oArr);
                     setCurrentPlayer();
@@ -220,5 +219,9 @@ twoPlayerButton.addEventListener("click", controller.partialReset)
 // Picks a random square from the available squares.
 function compPick() {
     let randomPick = Math.floor(Math.random() * gameBoard.availableSquares.length);
-    console.log(randomPick)
+    let pickId = (gameBoard.availableSquares[randomPick]);
+    document.getElementById(pickId).click();
 }
+
+// Sets flag for player vs player or player vs computer.
+let playersFlag = 0
