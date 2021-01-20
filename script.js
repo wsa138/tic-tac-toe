@@ -17,6 +17,9 @@ const gameBoard = (function() {
         }
     }
 
+    // List of available spaces for computer pick
+    let availableSquares = ["square0", "square1", "square2", "square3", "square4", "square5", "square6", "square7", "square8"];
+
     // Function checks for a win on the gameboard.
     function _checkWin(xArr, oArr) {
         // Arrays of winning space combinations to check.
@@ -50,7 +53,11 @@ const gameBoard = (function() {
         }
     }
 
-
+    // Removes a picked square from the availableSquares array.
+    function removePicked(sqr) {
+        let rmvSqr = availableSquares.indexOf(sqr);
+        availableSquares.splice(rmvSqr, 1);
+    }
 
 
     // Function that adds event listeners on elements in an array.
@@ -62,6 +69,8 @@ const gameBoard = (function() {
                 document.getElementById("results").childNodes[1]) {
                     return;
                 } else {
+                    removePicked(this.id);
+                    console.log(availableSquares);
                     _replaceInner(element, playerMod.playersArr[currentPlayer].mark, xArr, oArr);
                     _checkWin(xArr, oArr);
                     setCurrentPlayer();
@@ -74,7 +83,8 @@ const gameBoard = (function() {
 
     return {
         gameBoardArray,
-        setListener
+        setListener,
+        availableSquares
     }
 })();
 
@@ -195,13 +205,20 @@ gameBoard.setListener(gameBoard.gameBoardArray,
 
 
 
-    
+
 // One player button. Reset game, start game with computer.
 let onePlayerButton = document.getElementById("onePlayer");
 onePlayerButton.addEventListener("click", controller.partialReset)
 
 
-
 // Two player button. Reset game, start game with two players.
 let twoPlayerButton = document.getElementById("twoPlayer");
 twoPlayerButton.addEventListener("click", controller.partialReset)
+
+
+
+// Picks a random square from the available squares.
+function compPick() {
+    let randomPick = Math.floor(Math.random() * gameBoard.availableSquares.length);
+    console.log(randomPick)
+}
