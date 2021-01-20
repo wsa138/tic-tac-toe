@@ -72,7 +72,7 @@ const gameBoard = (function() {
                     _checkWin(xArr, oArr);
                     setCurrentPlayer();
                     if (currentPlayer === 1 && playersFlag === 1 && availableSquares.length > 0) {
-                        compPick();
+                        controller.compPick();
                     }
                 }
             })
@@ -183,51 +183,42 @@ const controller = (function() {
              "square4", "square5", "square6", "square7", "square8"];
     }
 
+    // Picks a random square from the available squares.
+    function compPick() {
+        let randomPick = Math.floor(Math.random() * availableSquares.length);
+        let pickId = (availableSquares[randomPick]);
+        document.getElementById(pickId).click();
+    }
+
+    // One player button. Reset game, start game with computer.
+    let onePlayerButton = document.getElementById("onePlayer");
+    onePlayerButton.addEventListener("click", partialReset)
+    onePlayerButton.addEventListener("click", function() {
+        playersFlag = 1;
+        onePlayerButton.style.fontWeight = "900";
+        twoPlayerButton.style.fontWeight = "500";
+        gameBoard.setListener(gameBoard.gameBoardArray, 
+            playerMod.xSpaces, 
+            playerMod.oSpaces)
+    })
 
 
-    return {winner, tie, playAgain, reset, partialReset}
+    // Two player button. Reset game, start game with two players.
+    let twoPlayerButton = document.getElementById("twoPlayer");
+    twoPlayerButton.addEventListener("click", partialReset)
+    twoPlayerButton.addEventListener("click", function() {
+        twoPlayerButton.style.fontWeight = "900";
+        onePlayerButton.style.fontWeight = "500";
+        playersFlag = 2;
+        gameBoard.setListener(gameBoard.gameBoardArray, 
+            playerMod.xSpaces, 
+            playerMod.oSpaces)
+    })
+
+
+    return {winner, tie, playAgain, reset, partialReset, compPick}
 })();
 
-
-
-
-
-
-
-
-
-
-// One player button. Reset game, start game with computer.
-let onePlayerButton = document.getElementById("onePlayer");
-onePlayerButton.addEventListener("click", controller.partialReset)
-onePlayerButton.addEventListener("click", function() {
-    playersFlag = 1;
-    onePlayerButton.style.fontWeight = "900";
-    twoPlayerButton.style.fontWeight = "500";
-    gameBoard.setListener(gameBoard.gameBoardArray, 
-        playerMod.xSpaces, 
-        playerMod.oSpaces)
-})
-
-
-// Two player button. Reset game, start game with two players.
-let twoPlayerButton = document.getElementById("twoPlayer");
-twoPlayerButton.addEventListener("click", controller.partialReset)
-twoPlayerButton.addEventListener("click", function() {
-    twoPlayerButton.style.fontWeight = "900";
-    onePlayerButton.style.fontWeight = "500";
-    playersFlag = 2;
-    gameBoard.setListener(gameBoard.gameBoardArray, 
-        playerMod.xSpaces, 
-        playerMod.oSpaces)
-})
-
-// Picks a random square from the available squares.
-function compPick() {
-    let randomPick = Math.floor(Math.random() * availableSquares.length);
-    let pickId = (availableSquares[randomPick]);
-    document.getElementById(pickId).click();
-}
 
 
 
