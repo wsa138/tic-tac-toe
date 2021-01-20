@@ -73,7 +73,9 @@ const gameBoard = (function() {
                     _replaceInner(element, playerMod.playersArr[currentPlayer].mark, xArr, oArr);
                     _checkWin(xArr, oArr);
                     setCurrentPlayer();
-
+                        if (currentPlayer === 1 && playersFlag === 1) {
+                            compPick();
+                        }
                 }
             })
         })
