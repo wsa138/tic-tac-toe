@@ -202,7 +202,8 @@ let onePlayerButton = document.getElementById("onePlayer");
 onePlayerButton.addEventListener("click", controller.partialReset)
 onePlayerButton.addEventListener("click", function() {
     playersFlag = 1;
-    console.log("vs pc");
+    onePlayerButton.style.fontWeight = "900";
+    twoPlayerButton.style.fontWeight = "500";
     gameBoard.setListener(gameBoard.gameBoardArray, 
         playerMod.xSpaces, 
         playerMod.oSpaces)
@@ -213,6 +214,8 @@ onePlayerButton.addEventListener("click", function() {
 let twoPlayerButton = document.getElementById("twoPlayer");
 twoPlayerButton.addEventListener("click", controller.partialReset)
 twoPlayerButton.addEventListener("click", function() {
+    twoPlayerButton.style.fontWeight = "900";
+    onePlayerButton.style.fontWeight = "500";
     playersFlag = 2;
     gameBoard.setListener(gameBoard.gameBoardArray, 
         playerMod.xSpaces, 
@@ -223,9 +226,7 @@ twoPlayerButton.addEventListener("click", function() {
 function compPick() {
     let randomPick = Math.floor(Math.random() * availableSquares.length);
     let pickId = (availableSquares[randomPick]);
-    console.log("pc picking");
     document.getElementById(pickId).click();
-    console.log(pickId);
 }
 
 
