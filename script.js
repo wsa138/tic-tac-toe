@@ -172,7 +172,7 @@ const controller = (function() {
     }
 
     // Resets board and x/o arrays only.
-    function partialReset() {
+    function _partialReset() {
         playerMod.xSpaces.length = 0;
         playerMod.oSpaces.length = 0;
         currentPlayer = 0;
@@ -191,12 +191,12 @@ const controller = (function() {
     }
 
     // One player button. Reset game, start game with computer.
-    let onePlayerButton = document.getElementById("onePlayer");
-    onePlayerButton.addEventListener("click", partialReset)
-    onePlayerButton.addEventListener("click", function() {
+    let _onePlayerButton = document.getElementById("onePlayer");
+    _onePlayerButton.addEventListener("click", _partialReset)
+    _onePlayerButton.addEventListener("click", function() {
         playersFlag = 1;
-        onePlayerButton.style.fontWeight = "900";
-        twoPlayerButton.style.fontWeight = "500";
+        _onePlayerButton.style.fontWeight = "900";
+        _twoPlayerButton.style.fontWeight = "500";
         gameBoard.setListener(gameBoard.gameBoardArray, 
             playerMod.xSpaces, 
             playerMod.oSpaces)
@@ -204,11 +204,11 @@ const controller = (function() {
 
 
     // Two player button. Reset game, start game with two players.
-    let twoPlayerButton = document.getElementById("twoPlayer");
-    twoPlayerButton.addEventListener("click", partialReset)
-    twoPlayerButton.addEventListener("click", function() {
-        twoPlayerButton.style.fontWeight = "900";
-        onePlayerButton.style.fontWeight = "500";
+    let _twoPlayerButton = document.getElementById("twoPlayer");
+    _twoPlayerButton.addEventListener("click", _partialReset)
+    _twoPlayerButton.addEventListener("click", function() {
+        _twoPlayerButton.style.fontWeight = "900";
+        _onePlayerButton.style.fontWeight = "500";
         playersFlag = 2;
         gameBoard.setListener(gameBoard.gameBoardArray, 
             playerMod.xSpaces, 
@@ -216,7 +216,7 @@ const controller = (function() {
     })
 
 
-    return {winner, tie, playAgain, reset, partialReset, compPick}
+    return {winner, tie, playAgain, reset, compPick}
 })();
 
 
