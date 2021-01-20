@@ -17,9 +17,7 @@ const gameBoard = (function() {
         }
     }
 
-    // List of available spaces for computer pick
-    let availableSquares = ["square0", "square1", "square2", "square3", "square4", "square5", "square6", "square7", "square8"];
-
+    
     // Function checks for a win on the gameboard.
     function _checkWin(xArr, oArr) {
         // Arrays of winning space combinations to check.
@@ -73,9 +71,9 @@ const gameBoard = (function() {
                     _replaceInner(element, playerMod.playersArr[currentPlayer].mark, xArr, oArr);
                     _checkWin(xArr, oArr);
                     setCurrentPlayer();
-                        if (currentPlayer === 1 && playersFlag === 1) {
-                            compPick();
-                        }
+                    if (currentPlayer === 1 && playersFlag === 1 && availableSquares.length > 0) {
+                        compPick();
+                    }
                 }
             })
         })
@@ -85,7 +83,6 @@ const gameBoard = (function() {
     return {
         gameBoardArray,
         setListener,
-        availableSquares
     }
 })();
 
@@ -179,6 +176,8 @@ const controller = (function() {
         gameBoard.gameBoardArray.forEach(function(sqr) {
             sqr.innerHTML = "&nbsp";
         })
+        availableSquares = availableSquares = ["square0", "square1", "square2", "square3",
+             "square4", "square5", "square6", "square7", "square8"];
     }
 
     // Resets board and x/o arrays only.
@@ -189,6 +188,8 @@ const controller = (function() {
         gameBoard.gameBoardArray.forEach(function(sqr) {
             sqr.innerHTML = "&nbsp";
         })
+        availableSquares = availableSquares = ["square0", "square1", "square2", "square3",
+             "square4", "square5", "square6", "square7", "square8"];
     }
 
 
@@ -212,6 +213,7 @@ let onePlayerButton = document.getElementById("onePlayer");
 onePlayerButton.addEventListener("click", controller.partialReset)
 onePlayerButton.addEventListener("click", function() {
     playersFlag = 1;
+    console.log("vs pc");
 })
 
 
@@ -224,11 +226,15 @@ twoPlayerButton.addEventListener("click", function() {
 
 // Picks a random square from the available squares.
 function compPick() {
-    let randomPick = Math.floor(Math.random() * gameBoard.availableSquares.length);
-    let pickId = (gameBoard.availableSquares[randomPick]);
+    let randomPick = Math.floor(Math.random() * availableSquares.length);
+    let pickId = (availableSquares[randomPick]);
+    console.log("pc picking");
     document.getElementById(pickId).click();
+    console.log(pickId);
 }
 
 // Sets flag for player vs player or player vs computer.
-let playersFlag = 2
+let playersFlag = 2;
 
+// List of available spaces for computer pick
+let availableSquares = ["square0", "square1", "square2", "square3", "square4", "square5", "square6", "square7", "square8"];
