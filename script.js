@@ -208,13 +208,17 @@ gameBoard.setListener(gameBoard.gameBoardArray,
 // One player button. Reset game, start game with computer.
 let onePlayerButton = document.getElementById("onePlayer");
 onePlayerButton.addEventListener("click", controller.partialReset)
+onePlayerButton.addEventListener("click", function() {
+    playersFlag = 1;
+})
 
 
 // Two player button. Reset game, start game with two players.
 let twoPlayerButton = document.getElementById("twoPlayer");
 twoPlayerButton.addEventListener("click", controller.partialReset)
-
-
+twoPlayerButton.addEventListener("click", function() {
+    playersFlag = 2;
+})
 
 // Picks a random square from the available squares.
 function compPick() {
@@ -224,4 +228,5 @@ function compPick() {
 }
 
 // Sets flag for player vs player or player vs computer.
-let playersFlag = 0
+let playersFlag = 2
+
