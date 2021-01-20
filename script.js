@@ -17,8 +17,6 @@ const gameBoard = (function() {
         }
     }
 
-
-
     // Function checks for a win on the gameboard.
     function _checkWin(xArr, oArr) {
         // Arrays of winning space combinations to check.
@@ -172,12 +170,38 @@ const controller = (function() {
         })
     }
 
+    // Resets board and x/o arrays only.
+    function partialReset() {
+        playerMod.xSpaces.length = 0;
+        playerMod.oSpaces.length = 0;
+        currentPlayer = 0;
+        gameBoard.gameBoardArray.forEach(function(sqr) {
+            sqr.innerHTML = "&nbsp";
+        })
+    }
 
 
-    return {winner, tie, playAgain, reset}
+
+    return {winner, tie, playAgain, reset, partialReset}
 })();
+
+
+
 
 
 gameBoard.setListener(gameBoard.gameBoardArray, 
     playerMod.xSpaces, 
     playerMod.oSpaces)
+
+
+
+    
+// One player button. Reset game, start game with computer.
+let onePlayerButton = document.getElementById("onePlayer");
+onePlayerButton.addEventListener("click", controller.partialReset)
+
+
+
+// Two player button. Reset game, start game with two players.
+let twoPlayerButton = document.getElementById("twoPlayer");
+twoPlayerButton.addEventListener("click", controller.partialReset)
