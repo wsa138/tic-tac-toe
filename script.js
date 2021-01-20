@@ -88,15 +88,6 @@ const gameBoard = (function() {
 
 
 
-let currentPlayer = 0;
-
-function setCurrentPlayer() {
-    if (currentPlayer === 0) {
-        currentPlayer = 1;
-    } else {
-        currentPlayer = 0;
-    }
-}
 
 
 
@@ -201,9 +192,7 @@ const controller = (function() {
 
 
 
-gameBoard.setListener(gameBoard.gameBoardArray, 
-    playerMod.xSpaces, 
-    playerMod.oSpaces)
+
 
 
 
@@ -214,6 +203,9 @@ onePlayerButton.addEventListener("click", controller.partialReset)
 onePlayerButton.addEventListener("click", function() {
     playersFlag = 1;
     console.log("vs pc");
+    gameBoard.setListener(gameBoard.gameBoardArray, 
+        playerMod.xSpaces, 
+        playerMod.oSpaces)
 })
 
 
@@ -222,6 +214,9 @@ let twoPlayerButton = document.getElementById("twoPlayer");
 twoPlayerButton.addEventListener("click", controller.partialReset)
 twoPlayerButton.addEventListener("click", function() {
     playersFlag = 2;
+    gameBoard.setListener(gameBoard.gameBoardArray, 
+        playerMod.xSpaces, 
+        playerMod.oSpaces)
 })
 
 // Picks a random square from the available squares.
@@ -231,6 +226,24 @@ function compPick() {
     console.log("pc picking");
     document.getElementById(pickId).click();
     console.log(pickId);
+}
+
+
+
+
+
+    
+
+// Flag that indicates which players mark gets placed.
+let currentPlayer = 0;
+
+// Function that changes the currentPlayer flag. 
+function setCurrentPlayer() {
+    if (currentPlayer === 0) {
+        currentPlayer = 1;
+    } else {
+        currentPlayer = 0;
+    }
 }
 
 // Sets flag for player vs player or player vs computer.
